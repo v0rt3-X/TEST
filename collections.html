@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextwave | Luxury Watches & Jewelry</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #d4af37;
+            --light-gray: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            margin-left: 790px;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        .profile-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle; /* Adjust vertical alignment */
+    margin-left: 20px;
+}
+        .profile-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .profile-btn:hover {
+            background-color: #3a506b;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #collections {
+            padding-top: 80px;
+            background-color: var(--light-gray);
+            min-height: calc(100vh - 80px - 300px); /* Viewport height minus header and footer */
+            flex: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            padding-top: 2rem;
+        }
+
+        .collection-filters {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-button {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            background: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .collection-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: none;
+        }
+
+        .collection-card.visible {
+            display: block;
+        }
+
+        .collection-card:hover {
+            transform: scale(1.02);
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .collection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            color: white;
+        }
+
+        .collection-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .collection-description {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .collection-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .collection-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Nextwave</a>
+        <div class="nav-links">
+            <a href="watches.html">Watches</a>
+            <a href="jewelry.html">Jewelry</a>
+            <a href="collections.html">Collections</a>
+        </div>
+        <a href="register.html">
+          <img src="assets/profile.jpg" alt="Profile" class="profile-img">
+        </a>
+    </nav>
+</header>
+
+    <main>
+        <section id="collections">
+            <h2 class="section-title">Our Collections</h2>
+            
+            <div class="collection-filters">
+                <button class="filter-button active" data-filter="all">All</button>
+                <button class="filter-button" data-filter="luxury">Luxury Watches</button>
+                <button class="filter-button" data-filter="fine">Fine Jewelry</button>
+                <button class="filter-button" data-filter="limited">Limited Edition</button>
+                <button class="filter-button" data-filter="new">New Arrivals</button>
+            </div>
+
+            <div class="collections-grid">
+                <div class="collection-card visible" data-category="luxury">
+                    <img src="/api/placeholder/600/400" alt="Luxury Watches Collection">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">Luxury Watches</h3>
+                        <p class="collection-description">Discover our curated selection of premium timepieces from renowned watchmakers.</p>
+                        <a href="watches.html" class="collection-link">Explore Collection →</a>
+                    </div>
+                </div>
+
+                <div class="collection-card visible" data-category="fine">
+                    <img src="/api/placeholder/600/400" alt="Fine Jewelry Collection">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">Fine Jewelry</h3>
+                        <p class="collection-description">Exquisite jewelry pieces that capture timeless elegance and sophistication.</p>
+                        <a href="jewelry.html" class="collection-link">Explore Collection →</a>
+                    </div>
+                </div>
+
+                <div class="collection-card visible" data-category="limited">
+                    <img src="/api/placeholder/600/400" alt="Limited Edition Collection">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">Limited Edition</h3>
+                        <p class="collection-description">Exclusive pieces available only for a select few collectors.</p>
+                        <a href="limited.html" class="collection-link">Explore Collection →</a>
+                    </div>
+                </div>
+
+                <div class="collection-card visible" data-category="new">
+                    <img src="/api/placeholder/600/400" alt="New Arrivals Collection">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">New Arrivals</h3>
+                        <p class="collection-description">Be the first to discover our latest additions of watches and jewelry.</p>
+                        <a href="new.html" class="collection-link">Explore Collection →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Creating and selling the finest jewelry and premium watches since 2000.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    <li><a href="limited.html">Limited Edition</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="shipping.html">Shipping</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Email: email@gmail.com</li>
+                    <li>Phone: (555) 123-4567</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const collectionCards = document.querySelectorAll('.collection-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    
+                    // Show/hide cards based on filter
+                    collectionCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.classList.add('visible');
+                        } else {
+                            if (card.getAttribute('data-category') === filter) {
+                                card.classList.add('visible');
+                            } else {
+                                card.classList.remove('visible');
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

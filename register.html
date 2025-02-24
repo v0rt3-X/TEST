@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextwave | Sign Up</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #d4af37;
+            --light-gray: #f5f5f5;
+            --error-color: #dc3545;
+            --success-color: #28a745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            margin-left: 790px;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        .profile-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle; /* Adjust vertical alignment */
+    margin-left: 20px;
+}
+        .profile-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .profile-btn:hover {
+            background-color: #3a506b;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px 20px;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .signup-container, .signin-container {
+            display: none;
+        }
+
+        .signup-container.active, .signin-container.active {
+            display: block;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: normal;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #3a506b;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--success-color);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: center;
+        }
+
+        .auth-link {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--primary-color);
+        }
+
+        .auth-link a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-link a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Nextwave</a>
+        <div class="nav-links">
+            <a href="watches.html">Watches</a>
+            <a href="jewelry.html">Jewelry</a>
+            <a href="collections.html">Collections</a>
+        </div>
+        <a href="register.html">
+          <img src="assets/profile.jpg" alt="Profile" class="profile-img">
+        </a>
+    </nav>
+</header>
+
+    <main>
+        <div class="signup-container active" id="signupContainer">
+            <h1>Sign Up</h1>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" required>
+                    <div class="error-message" id="firstNameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                    <div class="error-message" id="signupEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                    <div class="error-message" id="signupPasswordError"></div>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+                <div class="success-message" id="signupSuccess">Successfully registered! You can now sign in.</div>
+            </form>
+            
+            <div class="auth-link">
+                Already have an account? <a href="#" id="showSignin">Sign In</a>
+            </div>
+        </div>
+
+        <div class="signin-container" id="signinContainer">
+            <h1>Sign In</h1>
+            <form id="signinForm">
+                <div class="form-group">
+                    <label for="signinEmail">Email</label>
+                    <input type="email" id="signinEmail" required>
+                    <div class="error-message" id="signinEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signinPassword">Password</label>
+                    <input type="password" id="signinPassword" required>
+                    <div class="error-message" id="signinPasswordError"></div>
+                </div>
+                <button type="submit" class="btn">Sign In</button>
+                <div class="success-message" id="signinSuccess">Successfully signed in!</div>
+            </form>
+            
+            <div class="auth-link">
+                Don't have an account? <a href="#" id="showSignup">Sign Up</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+          <div class="footer-section">
+              <h3>About Us</h3>
+              <p>Creating and selling the finest jewelry and premium watches since 2000.</p>
+          </div>
+          <div class="footer-section">
+              <h3>Quick Links</h3>
+              <ul>
+                  <li><a href="new-arrivals.html">New Arrivals</a></li>
+                  <li><a href="limited.html">Limited Edition</a></li>
+              </ul>
+          </div>
+          <div class="footer-section">
+              <h3>Customer Service</h3>
+              <ul>
+                  <li><a href="shipping.html">Shipping</a></li>
+                  <li><a href="faq.html">FAQ</a></li>
+              </ul>
+          </div>
+          <div class="footer-section">
+              <h3>Contact Us</h3>
+              <ul>
+                  <li>Email: email@gmail.com</li>
+                  <li>Phone: (555) 123-4567</li>
+              </ul>
+          </div>
+      </div>
+  </footer>
+
+    <script>
+        // Initialize users array from localStorage
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // Form toggle functionality
+        document.getElementById('showSignin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('signupContainer').classList.remove('active');
+            document.getElementById('signinContainer').classList.add('active');
+        });
+
+        document.getElementById('showSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('signinContainer').classList.remove('active');
+            document.getElementById('signupContainer').classList.add('active');
+        });
+
+        // Helper functions
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function resetErrors() {
+            const errorElements = document.getElementsByClassName('error-message');
+            const successElements = document.getElementsByClassName('success-message');
+            
+            Array.from(errorElements).forEach(element => {
+                element.style.display = 'none';
+            });
+            
+            Array.from(successElements).forEach(element => {
+                element.style.display = 'none';
+            });
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function isValidPassword(password) {
+            return password.length >= 8 &&
+                   /[A-Z]/.test(password) &&
+                   /[a-z]/.test(password) &&
+                   /[0-9]/.test(password);
+        }
+
+        // Sign Up Form Handler
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            resetErrors();
+            
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            let isValid = true;
+
+            // Validation
+            if (firstName.length < 2) {
+                showError('firstNameError', 'First name must be at least 2 characters');
+                isValid = false;
+            }
+
+            if (lastName.length < 2) {
+                showError('lastNameError', 'Last name must be at least 2 characters');
+                isValid = false;
+            }
+
+            if (!isValidEmail(email)) {
+                showError('signupEmailError', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            if (!isValidPassword(password)) {
+                showError('signupPasswordError', 'Password must be at least 8 characters and contain uppercase, lowercase, and numbers');
+                isValid = false;
+            }
+
+            if (password !== confirmPassword) {
+                showError('confirmPasswordError', 'Passwords do not match');
+                isValid = false;
+            }
+
+            if (users.some(user => user.email === email)) {
+                showError('signupEmailError', 'Email already registered');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Create new user
+                const newUser = {
+                    id: Date.now(),
+                    firstName,
+                    lastName,
+                    email,
+                    password, // In a real application, this should be hashed
+                    createdAt: new Date().toISOString()
+                };
+
+                // Add to users array and update localStorage
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+
+                // Show success message
+                document.getElementById('signupSuccess').style.display = 'block';
+
+                // Reset form
+                this.reset();
+
+                // Switch to sign in after delay
+                setTimeout(() => {
+                    document.getElementById('showSignin').click();
+                }, 2000);
+            }
+        });
+
+        // Sign In Form Handler
+        document.getElementById('signinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            resetErrors();
+
+            const email = document.getElementById('signinEmail').value.trim();
+            const password = document.getElementById('signinPassword').value;
+
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                // Create session
+                const session = {
+                    userId: user.id,
+                    email: user.email,
+                    firstName: user.firstName,
+                    loginTime: new Date().toISOString()
+                };
+
+                // Store session
+                sessionStorage.setItem('currentUser', JSON.stringify(session));
+
+                // Show success message
+                document.getElementById('signinSuccess').style.display = 'block';
+
+                // Reset form
+                this.reset();
+
+                // Redirect to home page after delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                showError('signinEmailError', 'Invalid email adress or password');
+            }
+        });
+    </script>
+</body>
