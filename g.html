@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camber Automotive Photography</title>
+    <style>
+        :root {
+            --primary-color: #0a0f1d;
+            --accent-color: #ff4500;
+            --text-color: #ffffff;
+            --secondary-bg: #111827;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://cdn.discordapp.com/attachments/1347397556208009338/1347398426672894183/IMG_5988.jpg?ex=67cbae12&is=67ca5c92&hm=69af559ecc5aa4e8176fd8b86d603099ab884c43fd31305653264b2d7cdb083d&') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin: 0 0.5rem;
+        }
+        
+        .btn:hover {
+            background-color: #e03e00;
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #ccc;
+        }
+        
+        /* Gallery Styles */
+        .gallery-container {
+            padding: 1rem 0;
+        }
+        
+        .gallery-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--text-color);
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 300px;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-overlay h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .load-more {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        /* Event Section */
+        .events-section {
+            background-color: var(--secondary-bg);
+        }
+        
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .event-card {
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .event-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .event-card:hover .event-image img {
+            transform: scale(1.1);
+        }
+        
+        .event-details {
+            padding: 1.5rem;
+        }
+        
+        .event-date {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-details h3 {
+            margin-bottom: 1rem;
+        }
+        
+        /* About Section */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            color: var(--text-color);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        button {
+            cursor: pointer;
+            border: none;
+        }
+        
+        footer {
+            background-color: var(--secondary-bg);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-color);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 2rem;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            object-fit: contain;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 2rem;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container flex justify-between items-center">
+            <div class="logo">
+                <!-- SVG logo inspired by image 2 -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="48" stroke="#888" stroke-width="2" fill="none" />
+                    <circle cx="50" cy="50" r="42" stroke="#888" stroke-width="2" fill="none" />
+                    <path d="M50 8 L50 38 L75 29 Z" fill="#ff4500" />
+                    <path d="M50 8 L50 38 L25 29 Z" fill="#fff" />
+                    <path d="M92 50 L62 50 L71 75 Z" fill="#ff4500" />
+                    <path d="M92 50 L62 50 L71 25 Z" fill="#fff" />
+                    <path d="M50 92 L50 62 L25 71 Z" fill="#ff4500" />
+                    <path d="M50 92 L50 62 L75 71 Z" fill="#fff" />
+                    <path d="M8 50 L38 50 L29 25 Z" fill="#ff4500" />
+                    <path d="M8 50 L38 50 L29 75 Z" fill="#fff" />
+                </svg>
+                <div class="logo-text">CAMBER</div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>CAMBER AUTOMOTIVE PHOTOGRAPHY</h1>
+            <p>Capturing the beauty of automotive design at car events across the country</p>
+            <div>
+                <a href="#gallery" class="btn">View Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photo Gallery</h2>
+                <p>Showcasing automotive excellence through our lens</p>
+            </div>
+            
+            <div class="gallery-container">
+                <div class="gallery-filter">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Car Shows</button>
+                    <button class="filter-btn">Track Days</button>
+                    <button class="filter-btn">Meets</button>
+                    <button class="filter-btn">Details</button>
+                </div>
+                
+                <div class="gallery">
+                    <!-- Gallery items with placeholder images -->
+                    <div class="gallery-item" data-category="Car Shows">
+                        <img src="https://www.ebaymotorsblog.com/motors/blog/wp-content/uploads/2014/01/toyota_ft1_concept_3-600x400-740x480.jpg" alt="Red sports car at show">
+                        <div class="gallery-overlay">
+                            <h3>Supercar Showcase</h3>
+                            <p>Annual Auto Show 2024</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="Track Days">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKt6pmDKMNb93K0HUPDI8Y4mD66XGf8AYAPg&s" alt="Blue race car on track">
+                        <div class="gallery-overlay">
+                            <h3>Track Attack</h3>
+                            <p>Circuit Racing Event</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="Meets">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7y2s6QOvp33wbeh7VL4zRMDlJwpqw5UJEGw&s" alt="Cars at sunset meet">
+                        <div class="gallery-overlay">
+                            <h3>Sunset Gathering</h3>
+                            <p>Monthly Car Meet</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="Details">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAo31xrvz4NdUbmJkU0CkTVsoipBzyQUjAEA&s" alt="Engine bay detail">
+                        <div class="gallery-overlay">
+                            <h3>Power Plant</h3>
+                            <p>Engineering Excellence</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="Car Shows">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKXHmsfiVc-6TmEHVqhj2mcQ5irz6MkbDOG2pPXd2TJV0sDrFToZHxJc_92zXDN4_jgnE&usqp=CAU" alt="Exotic car lineup">
+                        <div class="gallery-overlay">
+                            <h3>Exotic Row</h3>
+                            <p>Luxury Auto Exhibition</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="Meets">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRiTcBhJfwZGrFHKVdabWJQO2wgjMqZn10IA&s" alt="Custom cars at night">
+                        <div class="gallery-overlay">
+                            <h3>Night Moves</h3>
+                            <p>After Dark Meet</p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about">
+                <div class="about-content">
+                    <h2>About Camber Photography</h2>
+                    <p>Founded by automotive enthusiasts with a passion for photography, Camber specializes in capturing the essence and beauty of automotive design at events across the country.</p>
+                    <p>Our mission is to document the automotive culture, from local meets to international shows, preserving these moments for car lovers everywhere.</p>
+                    <p>What began as a hobby has grown into a dedicated pursuit to showcase vehicles in their best light - highlighting the craftsmanship, engineering, and artistry that goes into creating these magnificent machines.</p>
+                </div>
+                
+                <div class="about-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4A26vfKuMwiVgSWX67sikWh5brV1vbSkU_A&s" alt="Photographer at car event">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox for gallery images -->
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close">×</button>
+            <img src="" alt="">
+            <div class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" class="social-link">FB</a>
+                <a href="#" class="social-link">IG</a>
+                <a href="#" class="social-link">TW</a>
+                <a href="#" class="social-link">YT</a>
+            </div>
+            
+            <p>&copy; 2025 Camber Automotive Photography. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Simple JavaScript for the gallery functionality -->
+    <script>
+        // Lightbox functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.querySelector('.lightbox');
+            const lightboxImg = lightbox.querySelector('img');
+            const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+            const lightboxClose = lightbox.querySelector('.lightbox-close');
+            
+            // Open lightbox
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img');
+                    const caption = item.querySelector('h3').textContent;
+                    const subCaption = item.querySelector('p').textContent;
+                    
+                    lightboxImg.src = img.src;
+                    lightboxCaption.innerHTML = `<h3>${caption}</h3><p>${subCaption}</p>`;
+                    lightbox.classList.add('active');
+                });
+            });
+            
+            // Close lightbox
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+            });
+            
+            // Close on outside click
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                }
+            });
+            
+            // Filter gallery
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    const category = btn.textContent;
+                    
+                    // Show all items if "All" is selected
+                    if (category === 'All') {
+                        galleryItems.forEach(item => {
+                            item.style.display = 'block';
+                        });
+                    } else {
+                        // Filter items based on category
+                        galleryItems.forEach(item => {
+                            if (item.getAttribute('data-category') === category) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
